@@ -3,16 +3,21 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Result from "./pages/Result";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Homepage />,
+    },
+    {
+      path: "/result",
+      element: <Result />,
+    },
+  ],
   {
-    path: "/",
-    element: <Homepage />,
-  },
-  {
-    path: "/result",
-    element: <Result />,
-  },
-]);
+    basename: "/react-survey-template",
+  }
+);
 
 const App = () => {
   return <RouterProvider router={router} />;
