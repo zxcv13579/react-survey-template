@@ -9,3 +9,7 @@ git clone git@github.com:zxcv13579/react-survey-template.git
 yarn
 yarn dev
 ```
+
+## preview link
+
+https://zxcv13579.github.io/react-survey-template/
