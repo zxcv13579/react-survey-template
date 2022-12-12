@@ -1,25 +1,11 @@
-```javascript
-{
-  blocks: [
-    {
-      // 問卷題目
-      questionTitle: "",
-      // 問卷類型
-      questionType: "", // radio | radioGroup | text
-      // 問卷選項
-      options: [
-        {
-          // 該選項的 name，用於之後為 input name
-          name: "",
-          // 該選項的文字敘述
-          text: "",
-        },
-      ],
-    },
-  ];
-}
+## 目的
+
+主要是針對目前已經有問卷表單的網站，提供簡易的客製化問卷功能給行政人員做操作，後續只需要下載 json 檔，並在專案內引入即可。
+
+## 安裝
+
 ```
-
-操作流程
-
-1. 選擇該題目的類型：單選、複選、純文字框
+git clone git@github.com:zxcv13579/react-survey-template.git
+yarn
+yarn dev
+```
