@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect, useContext, useCallback } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import QuestionBlock from "../components/QuestionBlock";
 import { useNavigate } from "react-router-dom";
@@ -10,11 +10,10 @@ import ErrorText from "../components/ErrorText";
 import ModalComponent from "../components/Modal";
 
 function Homepage() {
-  const [showDownloadBtn, setShowDownloadBtn] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const { setData } = useContext(SurveyContext);
   const toast = useCustomToast();
   const navigate = useNavigate();
-  const downloadRef = useRef();
   const {
     setValue,
     watch,
@@ -42,6 +41,12 @@ function Homepage() {
     control,
   });
 
+  const goToResult = useCallback(() => {
+    navigate("/result");
+  }, [navigate]);
+  const goBack = useCallback(() => {
+    setShowModal(false);
+  }, []);
   useEffect(() => {
     fields.forEach((field, index) => {
       setValue(`elements.[${index}].name`, `q${index + 1}`);
@@ -57,19 +62,16 @@ function Homepage() {
         margin: "0 auto",
       }}
     >
-      <ModalComponent />
+      <ModalComponent
+        goToResult={goToResult}
+        goBack={goBack}
+        showModal={showModal}
+      />
       <HStack spacing="16px" py={5}>
-        <Button
-          ref={downloadRef}
-          display={showDownloadBtn ? "block" : "none"}
-          bg="primary.300"
-        >
-          下載
-        </Button>
         <Button
           bg="primary.300"
           onClick={handleSubmit((data) => {
-            setShowDownloadBtn(true);
+            setShowModal(true);
             const cloneData = _cloneDeep(data);
             cloneData.elements.forEach((d) => {
               if (d.type === "text") {
@@ -80,14 +82,6 @@ function Homepage() {
               }
             });
             setData(cloneData);
-            // console.log(cloneData);
-            navigate("/result");
-
-            // var dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(
-            //   JSON.stringify(data)
-            // )}`;
-            // downloadRef.current.setAttribute("href", dataStr);
-            // downloadRef.current.setAttribute("download", "surveyData.json");
           })}
         >
           製作

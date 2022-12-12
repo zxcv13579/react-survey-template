@@ -23,7 +23,6 @@ const surveyJson = {
 
 function Result() {
   const { data } = useContext(SurveyContext);
-  console.log(data);
 
   const survey = new Survey.Model(data);
   survey.focusFirstQuestionAutomatic = false;
