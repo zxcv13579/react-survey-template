@@ -15,7 +15,8 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/react-survey-template",
+    basename:
+      process.env.NODE_ENV === "development" ? "/" : "/react-survey-template",
   }
 );
 

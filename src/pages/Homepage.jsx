@@ -7,6 +7,7 @@ import _cloneDeep from "lodash/cloneDeep";
 import { SurveyContext } from "../context/SurveyContext";
 import useCustomToast from "../hooks/useCustomToast";
 import ErrorText from "../components/ErrorText";
+import ModalComponent from "../components/Modal";
 
 function Homepage() {
   const [showDownloadBtn, setShowDownloadBtn] = useState(false);
@@ -56,14 +57,17 @@ function Homepage() {
         margin: "0 auto",
       }}
     >
-      <HStack spacing="16px" p={5}>
-        <a
+      <ModalComponent />
+      <HStack spacing="16px" py={5}>
+        <Button
           ref={downloadRef}
-          style={{ display: showDownloadBtn ? "block" : "none" }}
+          display={showDownloadBtn ? "block" : "none"}
+          bg="primary.300"
         >
           下載
-        </a>
+        </Button>
         <Button
+          bg="primary.300"
           onClick={handleSubmit((data) => {
             setShowDownloadBtn(true);
             const cloneData = _cloneDeep(data);
@@ -89,6 +93,7 @@ function Homepage() {
           製作
         </Button>
         <Button
+          bg="primary.300"
           onClick={() => {
             append({
               title: "",
